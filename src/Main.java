@@ -35,9 +35,7 @@ public class Main extends JFrame {
         navBar.add(Box.createHorizontalGlue());
         navBar.add(x2);
 
-
         navBar.setBorder(new EmptyBorder(10, 10, 10, 10));
-
 
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new BorderLayout());
@@ -46,31 +44,26 @@ public class Main extends JFrame {
         leftPanel.setPreferredSize(new Dimension(630, getHeight()));
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 
-
         JPanel generalInfo = new JPanel();
         generalInfo.setLayout(new FlowLayout(FlowLayout.LEFT));
         generalInfo.setBorder(new EmptyBorder(10, 10, 10, 10));
         generalInfo.setMaximumSize(new Dimension(630, 90));
-
 
         JPanel tuDineroPanel = new JPanel();
         tuDineroPanel.setLayout(new BoxLayout(tuDineroPanel, BoxLayout.Y_AXIS));
         tuDineroPanel.setBackground(Color.RED);
         tuDineroPanel.setBorder(new EmptyBorder(10, 10, 10, 40));
 
-
         JLabel tu = new JLabel("Tu Dinero: ");
         tu.setFont(Fonts);
         tu.setForeground(Color.WHITE);
         tu.setFont(FontsBold);
-
         tu.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         JLabel dinero = new JLabel("1200EUR");
         dinero.setFont(FontsBold);
         dinero.setAlignmentX(Component.LEFT_ALIGNMENT);
         dinero.setForeground(Color.WHITE);
-
 
         tuDineroPanel.add(tu);
         tuDineroPanel.add(dinero);
@@ -82,11 +75,10 @@ public class Main extends JFrame {
         tuFinanciacion.setLayout(new BoxLayout(tuFinanciacion, BoxLayout.Y_AXIS));
         tuFinanciacion.setBorder(new EmptyBorder(10, 10, 10, 40));
 
-
         JLabel financiacionLabel = new JLabel("Tu Financiacion: ");
         financiacionLabel.setFont(FontsBold);
 
-        JLabel dinerolabel = new JLabel("1200EUR");
+        JLabel dinerolabel = new JLabel("1232300EUR");
         dinerolabel.setFont(FontsBold);
 
         tuFinanciacion.add(financiacionLabel);
@@ -104,27 +96,62 @@ public class Main extends JFrame {
         centerPanel.add(scrollPane, BorderLayout.WEST);
         centerPanel.add(rightPanel, BorderLayout.CENTER);
 
+        // Panel Cuentas
+        JPanel Cuentas = new JPanel(new BorderLayout()); // Cambiado a BorderLayout
+        Cuentas.setBorder(new EmptyBorder(10, 10, 10, 10));
+        leftPanel.add(Cuentas);
 
-
-        JPanel generalInfo2 = new JPanel();
-        generalInfo2.setLayout(new FlowLayout(FlowLayout.LEFT));
-        generalInfo2.setBorder(new EmptyBorder(10, 10, 10, 10));
-        generalInfo2.setMaximumSize(new Dimension(630, 90));
-
-        leftPanel.add(generalInfo2);
-
-        JLabel cuentasLabel = new JLabel("Cuentas :");
-        cuentasLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        generalInfo2.add(cuentasLabel);
-
-        generalInfo2.setBorder(new EmptyBorder(10, 24, 10, 10));
+        JLabel cuentasLabel = new JLabel("Cuentas:");
         cuentasLabel.setFont(FontsBold);
+        cuentasLabel.setOpaque(true);
+        cuentasLabel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        Cuentas.add(cuentasLabel, BorderLayout.NORTH); // Añadir el label al norte del BorderLayout
+
+        JPanel cuentasPanel = new JPanel();
+        cuentasPanel.setLayout(new BoxLayout(cuentasPanel, BoxLayout.Y_AXIS));
+        Cuentas.add(cuentasPanel, BorderLayout.CENTER);
+
+
+        //TODO: Hacer metodo crear cuenta
+        for (int i = 1; i <= 2; i++) {
+            JPanel cuenta = new JPanel(new BorderLayout());
+            cuenta.setBorder(new EmptyBorder(10, 40, 10, 10));
+            cuenta.setMaximumSize(new Dimension(630, 90));
+
+            JPanel cuentaInfoPanel = new JPanel();
+            cuentaInfoPanel.setLayout(new BoxLayout(cuentaInfoPanel, BoxLayout.Y_AXIS));
+            cuentaInfoPanel.setOpaque(false);
+
+            JLabel cuentaLabel = new JLabel("Cuenta " + i);
+            cuentaLabel.setFont(FontsBold);
+            cuentaLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            JLabel numberLabel = new JLabel("1234"); // Nuevo label con 4 números
+            numberLabel.setFont(Fonts);
+            numberLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            cuentaInfoPanel.add(cuentaLabel);
+            cuentaInfoPanel.add(Box.createVerticalStrut(5)); // Añadir espacio vertical entre los labels
+            cuentaInfoPanel.add(numberLabel);
+
+            JLabel montoLabel = new JLabel("1232300EUR");
+            montoLabel.setFont(FontsBold);
+            montoLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+
+            cuenta.add(cuentaInfoPanel, BorderLayout.WEST);
+            cuenta.add(montoLabel, BorderLayout.EAST);
+
+            cuentasPanel.add(cuenta);
+        }
+
+
 
         add(centerPanel, BorderLayout.CENTER);
 
-
         setVisible(true);
     }
+
 
     public void addNewLabel(String text) {
         JLabel newLabel = new JLabel(text);
