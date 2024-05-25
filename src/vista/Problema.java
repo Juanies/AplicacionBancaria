@@ -1,13 +1,11 @@
-import vista.LoginForm;
-import vista.Problema;
+package vista;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class Main extends JFrame{
-
-    public Main(){
+public class Problema extends JFrame{
+    public Problema(){
         setSize(640, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Santander - Problemas con tu clave");
@@ -41,7 +39,7 @@ public class Main extends JFrame{
         detallePanelIzqueirdo.setFont(headlineFont);
 
 
-        JButton botonPanelIzquierdo = new JButton("Aceptar");
+        JButton botonPanelIzquierdo = new JButton("Recuperar Clave");
         botonPanelIzquierdo.setBounds(100, 160, 145, 40);
         botonPanelIzquierdo.setFont(headlineFont);
         botonPanelIzquierdo.setBackground(Color.RED);
@@ -63,7 +61,7 @@ public class Main extends JFrame{
         detallePanelDerecho.setFont(headlineFont);
 
 
-        JButton botonPanelDerecho = new JButton("Aceptar");
+        JButton botonPanelDerecho = new JButton("Alta en el servicio");
         botonPanelDerecho.setBounds(100, 160, 145, 40);
         botonPanelDerecho.setBackground(Color.RED);
         botonPanelDerecho.setBorder(null);
@@ -81,9 +79,4 @@ public class Main extends JFrame{
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
-    public static void main(String[] args) {
-        new Problema();
-    }
-
 }
