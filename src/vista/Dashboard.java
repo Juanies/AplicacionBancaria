@@ -1,6 +1,7 @@
 package vista;
 
 import vista.LoginForm;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -103,6 +104,15 @@ public class Dashboard extends JFrame {
 
         JScrollPane scrollPane = new JScrollPane(leftPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        scrollPane.getVerticalScrollBar().setBackground(Color.WHITE);
+
+        // Forma de cambiar el color de la barra de scroll : PD: StackOverFlow
+        scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+            @Override
+            protected void configureScrollBarColors() {
+                this.thumbColor = new Color(220, 53, 69);
+            }
+        });
 
         JPanel rightPanel = new JPanel();
         rightPanel.setPreferredSize(new Dimension(270, getHeight()));

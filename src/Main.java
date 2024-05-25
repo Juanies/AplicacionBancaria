@@ -1,5 +1,4 @@
-import vista.LoginForm;
-import vista.Problema;
+import vista.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -83,7 +82,8 @@ public class Main extends JFrame{
     }
 
     public static void main(String[] args) {
-        new Problema();
+
+        new Dashboard();
     }
 
 }
