@@ -1,3 +1,5 @@
+import controlador.LoginFormControlador;
+import controlador.NewUserControlador;
 import vista.*;
 
 import javax.swing.*;
@@ -83,7 +85,8 @@ public class Main extends JFrame{
 
     public static void main(String[] args) {
 
-        new Dashboard();
+
+        new LoginFormControlador(new LoginForm());
     }
 
 }

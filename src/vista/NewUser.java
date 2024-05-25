@@ -4,6 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class NewUser extends JFrame {
+    public JComboBox tipoDocumentoDropdown;
+    public JTextField numeroDocumentoField;
+    public JTextField usuarioField;
+    public JTextField claveField;
+    public JButton registrarButton;
+    public JButton cancelarButton;
 
     public NewUser(){
         setSize(600, 400);
@@ -20,32 +26,31 @@ public class NewUser extends JFrame {
         titulo.setFont(headlineFont);
         titulo.setBounds(200, 10, 200, size.height);
 
-        JComboBox<String> tipoDocumentoDropdown;
         String[] opcionesDocumento = {"NIF", "CIF", "NIE"};
         tipoDocumentoDropdown = new JComboBox<>(opcionesDocumento);
         tipoDocumentoDropdown.setSelectedIndex(0);
         tipoDocumentoDropdown.setBounds(150, 50, 80, 30);
 
-        JTextField numeroDocumentoField = new JTextField("Número de documento");
+        numeroDocumentoField = new JTextField("Número de documento");
         numeroDocumentoField.setFont(headlineFont);
         numeroDocumentoField.setBounds(240, 50, 210, 30);
 
-        JTextField usuarioField = new JTextField("Usuario");
+        usuarioField = new JTextField("Usuario");
         usuarioField.setFont(headlineFont);
         usuarioField.setBounds(150, 100, 300, 30);
 
-        JTextField claveField = new JTextField("Contraseña");
+        claveField = new JTextField("Contraseña");
         claveField.setFont(headlineFont);
         claveField.setBounds(150, 150, 300, 30);
 
-        JButton registrarButton = new JButton("Registrar");
+        registrarButton = new JButton("Registrar");
         registrarButton.setBounds(150, 200, 145, 40);
         registrarButton.setBackground(Color.RED);
         registrarButton.setBorder(null);
         registrarButton.setFont(headlineFontBold);
         registrarButton.setForeground(Color.WHITE);
 
-        JButton cancelarButton = new JButton("Cancelar");
+        cancelarButton = new JButton("Cancelar");
         cancelarButton.setBounds(305, 200, 145, 40);
         cancelarButton.setBackground(Color.GRAY);
         cancelarButton.setBorder(null);
@@ -63,6 +68,24 @@ public class NewUser extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
+
+    public String getTipoDocumento() {
+        return (String) tipoDocumentoDropdown.getSelectedItem();
+    }
+
+    public String getDocumento() {
+        return numeroDocumentoField.getText();
+    }
+
+    public String getUsuario() {
+        return usuarioField.getText();
+    }
+
+    public String getClave() {
+        return claveField.getText();
+    }
+
+
 
 }
 

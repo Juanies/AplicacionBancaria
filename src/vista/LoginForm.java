@@ -4,6 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LoginForm extends JFrame {
+
+    public JComboBox tipoDocumentoDropdown;
+    public JTextField numeroDocumentoField;
+    public JTextField claveField;
+    public JButton entrar;
+
     public LoginForm(){
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,23 +27,21 @@ public class LoginForm extends JFrame {
 
         JComboBox<String> optionsDropdown;
         String[] options = {"NIF", "CIF", "NIE", "Usuario"};
-        optionsDropdown = new JComboBox<>(options);
-        optionsDropdown.setSelectedIndex(1); // No option selected by default
-        add(optionsDropdown);
-        optionsDropdown.setBounds(150, 80, 80, 30);
+        tipoDocumentoDropdown = new JComboBox<>(options);
+        tipoDocumentoDropdown.setSelectedIndex(1);
+        add(tipoDocumentoDropdown);
+        tipoDocumentoDropdown.setBounds(150, 80, 80, 30);
 
-        JTextField nDocumento = new JTextField("Nº de documento");
-        nDocumento.setFont(headlineFont);
-        nDocumento.setBounds(236, 80, 300 - 90, 30);
+        numeroDocumentoField = new JTextField("Nº de documento");
+        numeroDocumentoField.setFont(headlineFont);
+        numeroDocumentoField.setBounds(236, 80, 300 - 90, 30);
 
-        JTextField clave = new JTextField("Clave de acceso");
-        clave.setFont(headlineFont);
-        clave.setBounds(150, 140, (300 - 90) + 80 + 6, 30);
+         claveField = new JTextField("Clave de acceso");
+        claveField.setFont(headlineFont);
+        claveField.setBounds(150, 140, (300 - 90) + 80 + 6, 30);
 
-        JCheckBox recordar = new JCheckBox("Recordar usuario");
-        recordar.setBounds(150, 190, recordar.getPreferredSize().width, 20);
 
-        JButton entrar = new JButton("Entrar");
+         entrar = new JButton("Entrar");
         entrar.setBounds(300, 190, 145, 40);
         entrar.setBackground(Color.RED);
         entrar.setBorder(null);
@@ -55,13 +59,25 @@ public class LoginForm extends JFrame {
 
 
         add(titulo);
-        add(nDocumento);
-        add(clave);
-        add(recordar);
+        add(numeroDocumentoField);
+        add(claveField);
         add(entrar);
         add(problemas);
 
         setLocationRelativeTo(null);
         setVisible(true);
     }
+
+    public String getTipoDocumento() {
+        return (String) tipoDocumentoDropdown.getSelectedItem();
+    }
+
+    public String getDocumento() {
+        return numeroDocumentoField.getText().trim();
+    }
+
+    public String getClave() {
+        return claveField.getText().trim();
+    }
+
 }
