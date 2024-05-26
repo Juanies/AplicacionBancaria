@@ -1,7 +1,4 @@
-import controlador.DashBoardControlador;
-import controlador.LoginFormControlador;
-import controlador.NewUserControlador;
-import controlador.nuevaCuentaControlador;
+import controlador.*;
 import vista.*;
 
 import javax.swing.*;
@@ -17,7 +14,7 @@ public class Main extends JFrame{
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
 
-        new DashBoardControlador(new Dashboard());
+        new Dashboard();
     }
 
 }

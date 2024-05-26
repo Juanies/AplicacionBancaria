@@ -45,6 +45,30 @@ public class cuentaDAO {
         return cuentas;
     }
 
+    public static Cuenta buscarCuentaPorNombre(String nombre, Connection con){
+        Cuenta cuenta = null;
+        String sql = "SELECT * FROM cuenta WHERE nombreCuenta = ?";
+        try(PreparedStatement stmt = con.prepareStatement(sql)){
+            stmt.setString(1, nombre);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()){
+                int cuentaId = rs.getInt("id");
+                int usuarioid = rs.getInt("usuarioID");
+                double saldo = rs.getDouble("saldo");
+                String tipoCuenta = rs.getString("tipoCuenta");
+                String fechaCreacion = rs.getString("fechaCreacion");
+                String nombreCuenta = rs.getString("nombreCuenta");
+
+                cuenta = new Cuenta(cuentaId, usuarioid, saldo, tipoCuenta, fechaCreacion, nombreCuenta);
+
+            }
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return cuenta;
+    }
     public static double saldoTodasCuentas(int id, Connection con){
         ArrayList<Cuenta> cuentas = cogerTodasCuentasUsuario(id, con);
         double saldo = 0;

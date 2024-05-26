@@ -14,6 +14,13 @@ public class Financiacion {
     private Boolean aceptado;
 
 
+    public Financiacion(int cuentaID, double cantidad, String motivo, Boolean aceptado) {
+        this.cuentaID = cuentaID;
+        this.cantidad = cantidad;
+        this.motivo = motivo;
+        this.aceptado = aceptado;
+    }
+
     public Financiacion(int id, int cuentaID, double cantidad, String motivo, Boolean aceptado) {
         this.id = id;
         this.cuentaID = cuentaID;
@@ -23,47 +30,12 @@ public class Financiacion {
     }
 
 
-    public static ArrayList<Financiacion> cogerTodasFinanciacionCuentas(int id, Connection con){
-        ArrayList<Cuenta> cuentas = cuentaDAO.cogerTodasCuentasUsuario(id, con);
-        ArrayList<Financiacion> financiaciones = new ArrayList<>();
-
-        for(Cuenta cuenta : cuentas){
-
-            String sql = "SELECT * FROM financiacion WHERE cuentaID = ?";
-            try(PreparedStatement stmt = con.prepareStatement(sql)){
-                stmt.setInt(1, cuenta.getId());
-                ResultSet rs = stmt.executeQuery();
-
-                while (rs.next()){
-                    int financiacionID = rs.getInt("id");
-                    int cuentaid = rs.getInt("cuentaID");
-                    double cantidadFinanciacion = rs.getDouble("cantidad");
-                    String motivoFinanciacion = rs.getString("motivo");
-                    Boolean estaAceptado = rs.getBoolean("aceptado");
-
-                    Financiacion financiacion = new Financiacion(financiacionID, cuentaid, cantidadFinanciacion, motivoFinanciacion, estaAceptado);
-                    if (financiacion.aceptado){
-                        financiaciones.add(financiacion);
-                    }
-                }
-
-            }catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        return financiaciones;
+    public Boolean getAceptado() {
+        return aceptado;
     }
 
-    public static double financiacionTotal(int id, Connection con){
-        ArrayList<Financiacion> financiaciones = cogerTodasFinanciacionCuentas(id, con);
-        double total = 0;
-
-        for(Financiacion financiacion : financiaciones){
-            total += financiacion.getCantidad();
-        }
-
-        return total;
+    public void setAceptado(Boolean aceptado) {
+        this.aceptado = aceptado;
     }
 
     public int getId() {

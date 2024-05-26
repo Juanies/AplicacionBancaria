@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Dashboard extends JFrame {
     public JPanel leftPanel;
@@ -125,6 +126,19 @@ public class Dashboard extends JFrame {
 
         JPanel rightPanel = new JPanel();
         rightPanel.setPreferredSize(new Dimension(270, getHeight()));
+        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+
+
+
+
+        ArrayList<String> botonesDerecha = new ArrayList<>(Arrays.asList("Nueva cuenta", "Nueva tarjeta", "Nueva financiación", "Enviar dinero", "Cambiar contraseña", "Borrar cuenta Bancaria"));
+
+        for (String boton : botonesDerecha) {
+            JButton botons = new JButton(boton);
+            botons.setMaximumSize(new Dimension(Integer.MAX_VALUE, botons.getPreferredSize().height + 20));
+            botons.setBackground(Color.WHITE);
+            rightPanel.add(botons);
+        }
 
         centerPanel.add(scrollPane, BorderLayout.WEST);
         centerPanel.add(rightPanel, BorderLayout.CENTER);
@@ -211,14 +225,6 @@ public class Dashboard extends JFrame {
         setVisible(true);
     }
 
-    public void addNewLabel(String text) {
-        JLabel newLabel = new JLabel(text);
-        newLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-        newLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        leftPanel.add(newLabel);
-        leftPanel.revalidate();
-        leftPanel.repaint();
-    }
 
     public void setFinanciacionTotalText(String text) {
         tuFinanciacionTotal = text;
@@ -255,7 +261,7 @@ public class Dashboard extends JFrame {
             cuentaLabel.setFont(FontsBold);
             cuentaLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-            JLabel numberLabel = new JLabel(String.valueOf(cuentaa.getId())); // Número de cuenta de ejemplo
+            JLabel numberLabel = new JLabel(String.valueOf(cuentaa.getId()));
             numberLabel.setFont(Fonts);
             numberLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 

@@ -1,17 +1,23 @@
 package vista;
 
+import programa.*;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class nuevaFinanciacion extends JFrame {
     public JTextField montoFinanciado;
     public JTextField motivoFinanciacion;
-    public JComboBox<String> cuenta; // Cambiado nombre y posición
+    public JComboBox<String> cuenta;
 
     public JButton solicitar;
+    public String[] financiacionOptions = {""};
 
     public nuevaFinanciacion(){
-        setSize(400, 350); // Se ajusta la altura para acomodar el nuevo campo
+        setSize(400, 350);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setTitle("Santander - Solicitar Financiación");
@@ -38,13 +44,12 @@ public class nuevaFinanciacion extends JFrame {
         motivoFinanciacion = new JTextField();
         motivoFinanciacion.setBounds(50, 150, 300, 30);
 
-        JLabel financiacionLabel = new JLabel("Cuenta para la Financiación:"); // Nuevo
+        JLabel financiacionLabel = new JLabel("Cuenta para la Financiación:");
         financiacionLabel.setFont(headlineFontBold);
         financiacionLabel.setBounds(50, 190, 200, 30);
 
-        String[] financiacionOptions = {"Préstamo Personal", "Hipoteca", "Tarjeta de Crédito"};
         cuenta = new JComboBox<>(financiacionOptions);
-        cuenta.setBounds(50, 220, 300, 30); // Cambiado posición
+        cuenta.setBounds(50, 220, 300, 30);
 
         solicitar = new JButton("Solicitar Financiación");
         solicitar.setBounds(100, 270, 200, 40);
@@ -58,8 +63,8 @@ public class nuevaFinanciacion extends JFrame {
         add(montoFinanciado);
         add(motivoLabel);
         add(motivoFinanciacion);
-        add(financiacionLabel); // Agregado
-        add(cuenta); // Agregado
+        add(financiacionLabel);
+        add(cuenta);
         add(solicitar);
 
         setLocationRelativeTo(null);
@@ -74,7 +79,22 @@ public class nuevaFinanciacion extends JFrame {
         return motivoFinanciacion.getText().trim();
     }
 
-    public String getTipoFinanciacion() {
+    public String getCuenta() {
         return (String) cuenta.getSelectedItem();
     }
+
+    public void setCuentas() throws IOException, ClassNotFoundException {
+        ArrayList<Cuenta> cuentas = cuentaDAO.cogerTodasCuentasUsuario(UsuarioDAO.getUsuarioActual().getId(), Util.con());
+        ArrayList<String> nombres = new ArrayList<>();
+
+        for (Cuenta cuenta : cuentas) {
+            nombres.add(cuenta.getNombreCuenta());
+        }
+
+        financiacionOptions = nombres.toArray(new String[0]);
+        // Esto actualiza el ComboBox con el array cambiado
+        cuenta.setModel(new DefaultComboBoxModel<>(financiacionOptions));
+
+    }
+
 }
