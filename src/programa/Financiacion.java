@@ -5,12 +5,15 @@ public class Financiacion {
     private int cuentaID;
     private double cantidad;
     private String motivo;
+    private Boolean aceptado;
 
-    public Financiacion(int id, int cuentaID, double cantidad, String motivo) {
+
+    public Financiacion(int id, int cuentaID, double cantidad, String motivo, Boolean aceptado) {
         this.id = id;
         this.cuentaID = cuentaID;
         this.cantidad = cantidad;
         this.motivo = motivo;
+        this.aceptado = aceptado;
     }
 
     public int getId() {

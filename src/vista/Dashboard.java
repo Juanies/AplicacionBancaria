@@ -8,9 +8,14 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class Dashboard extends JFrame {
-    private JPanel leftPanel;
+    public JPanel leftPanel;
     public String tuDineroTotal = "122";
     public String tuFinanciacionTotal = "122";
+    public JLabel dinero;
+    public JLabel dineroFinanciacion;
+    public JLabel saludoUsuario;
+    public JLabel ultimaConexion;
+
 
     public Dashboard() {
         setSize(900, 600);
@@ -29,20 +34,20 @@ public class Dashboard extends JFrame {
         navBar.setBackground(new Color(220, 53, 69));
         navBar.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        JLabel x = new JLabel("Buenas tardes, Romero Angel Millan");
-        JLabel x1 = new JLabel("Ultima conexion: 18-05-2024 / 20:43");
+        saludoUsuario = new JLabel("");
+        ultimaConexion = new JLabel("");
         JLabel x2 = new JLabel("Cambiar");
 
-        x.setFont(Fonts);
-        x.setForeground(Color.WHITE);
-        x1.setFont(Fonts);
-        x1.setForeground(Color.WHITE);
+        saludoUsuario.setFont(Fonts);
+        saludoUsuario.setForeground(Color.WHITE);
+        ultimaConexion.setFont(Fonts);
+        ultimaConexion.setForeground(Color.WHITE);
         x2.setFont(FontsBold);
         x2.setForeground(Color.WHITE);
 
-        navBar.add(x);
+        navBar.add(saludoUsuario);
         navBar.add(Box.createHorizontalGlue());
-        navBar.add(x1);
+        navBar.add(ultimaConexion);
         navBar.add(Box.createHorizontalGlue());
         navBar.add(x2);
 
@@ -72,7 +77,7 @@ public class Dashboard extends JFrame {
         tu.setFont(FontsBold);
         tu.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JLabel dinero = new JLabel( tuDineroTotal + " EUR");
+        dinero = new JLabel( tuDineroTotal + " EUR");
         dinero.setFont(FontsBold);
         dinero.setAlignmentX(Component.LEFT_ALIGNMENT);
         dinero.setForeground(Color.WHITE);
@@ -89,12 +94,12 @@ public class Dashboard extends JFrame {
         financiacionLabel.setFont(FontsBold);
         financiacionLabel.setForeground(Color.WHITE);
 
-        JLabel dinerolabel = new JLabel(tuFinanciacionTotal + " EUR");
-        dinerolabel.setFont(FontsBold);
-        dinerolabel.setForeground(Color.WHITE);
+        dineroFinanciacion = new JLabel(tuFinanciacionTotal + " EUR");
+        dineroFinanciacion.setFont(FontsBold);
+        dineroFinanciacion.setForeground(Color.WHITE);
 
         tuFinanciacion.add(financiacionLabel);
-        tuFinanciacion.add(dinerolabel);
+        tuFinanciacion.add(dineroFinanciacion);
 
         generalInfo.add(tuDineroPanel);
         generalInfo.add(tuFinanciacion);
@@ -241,4 +246,24 @@ public class Dashboard extends JFrame {
         leftPanel.revalidate();
         leftPanel.repaint();
     }
+
+    public void setFinanciacionTotalText(String text) {
+        tuFinanciacionTotal = text;
+        dineroFinanciacion.setText(tuFinanciacionTotal + " EUR");
+    }
+
+    public void setSaludoText(String text) {
+        saludoUsuario.setText("Buenas tardes, " + text);
+    }
+
+    public void setUltimaConexion(String text) {
+        ultimaConexion.setText(text);
+    }
+
+
+    public void setDineroTotalText(String text) {
+        tuDineroTotal = text;
+        dinero.setText(tuDineroTotal + " EUR");
+    }
+
 }
