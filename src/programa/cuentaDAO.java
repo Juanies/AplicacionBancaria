@@ -22,7 +22,7 @@ public class cuentaDAO {
 
     public static ArrayList<Cuenta> cogerTodasCuentasUsuario(int id, Connection con){
         ArrayList<Cuenta> cuentas = new ArrayList<>();
-        String sql = "SELECT * FROM financiacion WHERE cuentaID = ?";
+        String sql = "SELECT * FROM cuenta WHERE usuarioID = ?";
         try(PreparedStatement stmt = con.prepareStatement(sql)){
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -34,9 +34,8 @@ public class cuentaDAO {
                 String tipoCuenta = rs.getString("tipoCuenta");
                 String fechaCreacion = rs.getString("fechaCreacion");
                 String nombreCuenta = rs.getString("nombreCuenta");
-                double financiacion = rs.getDouble("financiacion");
 
-                Cuenta cuenta = new Cuenta(cuentaId, usuarioid, saldo, tipoCuenta, fechaCreacion, nombreCuenta, financiacion);
+                Cuenta cuenta = new Cuenta(cuentaId, usuarioid, saldo, tipoCuenta, fechaCreacion, nombreCuenta);
                 cuentas.add(cuenta);
             }
 

@@ -1,11 +1,13 @@
 package vista;
 
+import programa.Cuenta;
 import vista.LoginForm;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Dashboard extends JFrame {
     public JPanel leftPanel;
@@ -15,7 +17,9 @@ public class Dashboard extends JFrame {
     public JLabel dineroFinanciacion;
     public JLabel saludoUsuario;
     public JLabel ultimaConexion;
-
+    public JPanel cuentasPanel;
+    public Font FontsBold;
+    public Font Fonts;
 
     public Dashboard() {
         setSize(900, 600);
@@ -25,8 +29,8 @@ public class Dashboard extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        Font Fonts = new Font("Arial", Font.PLAIN, 16);
-        Font FontsBold = new Font("Arial", Font.BOLD, 16);
+        Fonts = new Font("Arial", Font.PLAIN, 16);
+        FontsBold = new Font("Arial", Font.BOLD, 16);
 
         JPanel navBar = new JPanel();
         navBar.setPreferredSize(new Dimension(getWidth(), 50));
@@ -136,43 +140,12 @@ public class Dashboard extends JFrame {
 
         Cuentas.add(cuentasLabel, BorderLayout.NORTH);
 
-        JPanel cuentasPanel = new JPanel();
+        cuentasPanel = new JPanel();
         cuentasPanel.setLayout(new BoxLayout(cuentasPanel, BoxLayout.Y_AXIS));
         cuentasPanel.setBackground(new Color(248, 249, 250));
         Cuentas.add(cuentasPanel, BorderLayout.CENTER);
 
-        for (int i = 1; i <= 4; i++) {
-            JPanel cuenta = new JPanel(new BorderLayout());
-            cuenta.setBorder(new EmptyBorder(10, 40, 10, 10));
-            cuenta.setMaximumSize(new Dimension(630, 90));
-            cuenta.setBackground(new Color(255, 255, 255));
 
-            JPanel cuentaInfoPanel = new JPanel();
-            cuentaInfoPanel.setLayout(new BoxLayout(cuentaInfoPanel, BoxLayout.Y_AXIS));
-            cuentaInfoPanel.setOpaque(false);
-
-            JLabel cuentaLabel = new JLabel("Cuenta " + i);
-            cuentaLabel.setFont(FontsBold);
-            cuentaLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-            JLabel numberLabel = new JLabel("1234"); // Número de cuenta de ejemplo
-            numberLabel.setFont(Fonts);
-            numberLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-            cuentaInfoPanel.add(cuentaLabel);
-            cuentaInfoPanel.add(Box.createVerticalStrut(5));
-            cuentaInfoPanel.add(numberLabel);
-
-            JLabel montoLabel = new JLabel("1232300EUR");
-            montoLabel.setFont(FontsBold);
-            montoLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-
-            cuenta.add(cuentaInfoPanel, BorderLayout.WEST);
-            cuenta.add(montoLabel, BorderLayout.EAST);
-
-            cuentasPanel.add(cuenta);
-            cuentasPanel.add(Box.createVerticalStrut(10));
-        }
 
         leftPanel.add(Box.createVerticalStrut(20));
         leftPanel.add(Cuentas);
@@ -266,4 +239,42 @@ public class Dashboard extends JFrame {
         dinero.setText(tuDineroTotal + " EUR");
     }
 
+
+    public void setCuentas(ArrayList<Cuenta> cuentas){
+        for (Cuenta cuentaa : cuentas) {
+            JPanel cuenta = new JPanel(new BorderLayout());
+            cuenta.setBorder(new EmptyBorder(10, 40, 10, 10));
+            cuenta.setMaximumSize(new Dimension(630, 90));
+            cuenta.setBackground(new Color(255, 255, 255));
+
+            JPanel cuentaInfoPanel = new JPanel();
+            cuentaInfoPanel.setLayout(new BoxLayout(cuentaInfoPanel, BoxLayout.Y_AXIS));
+            cuentaInfoPanel.setOpaque(false);
+
+            JLabel cuentaLabel = new JLabel(cuentaa.getNombreCuenta());
+            cuentaLabel.setFont(FontsBold);
+            cuentaLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            JLabel numberLabel = new JLabel(String.valueOf(cuentaa.getId())); // Número de cuenta de ejemplo
+            numberLabel.setFont(Fonts);
+            numberLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            cuentaInfoPanel.add(cuentaLabel);
+            cuentaInfoPanel.add(Box.createVerticalStrut(5));
+            cuentaInfoPanel.add(numberLabel);
+
+            JLabel montoLabel = new JLabel(String.valueOf(cuentaa.getSaldo()) + " EUR");
+            montoLabel.setFont(FontsBold);
+            montoLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+
+            cuenta.add(cuentaInfoPanel, BorderLayout.WEST);
+            cuenta.add(montoLabel, BorderLayout.EAST);
+
+            cuentasPanel.add(cuenta);
+            cuentasPanel.add(Box.createVerticalStrut(10));
+        }
+    }
+
 }
+
+
