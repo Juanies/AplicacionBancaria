@@ -7,6 +7,7 @@ import programa.Ventana;
 import vista.Dashboard;
 import vista.LoginForm;
 import vista.NewUser;
+import vista.Problema;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +25,7 @@ public class LoginFormControlador implements ActionListener {
         vista.numeroDocumentoField.addActionListener(this);
         vista.claveField.addActionListener(this);
         vista.entrar.addActionListener(this);
-
+        vista.problemas.addActionListener(this);
     }
 
     @Override
@@ -37,6 +38,12 @@ public class LoginFormControlador implements ActionListener {
                     throw new RuntimeException(ex);
                 }
                 break;
+            case "¿Problemas con tu clave de acceso?":
+                try {
+                    Ventana.nuevaVentana(vista, new ProblemaControlador(new Problema()));
+                } catch (IOException | ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
         }
     }
 

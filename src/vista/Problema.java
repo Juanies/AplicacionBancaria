@@ -5,6 +5,10 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class Problema extends JFrame{
+
+    public JButton botonPanelIzquierdo;
+    public JButton botonPanelDerecho;
+
     public Problema(){
         setSize(640, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,7 +43,7 @@ public class Problema extends JFrame{
         detallePanelIzqueirdo.setFont(headlineFont);
 
 
-        JButton botonPanelIzquierdo = new JButton("Recuperar Clave");
+        botonPanelIzquierdo = new JButton("Recuperar Clave");
         botonPanelIzquierdo.setBounds(100, 160, 145, 40);
         botonPanelIzquierdo.setFont(headlineFont);
         botonPanelIzquierdo.setBackground(Color.RED);
@@ -61,7 +65,7 @@ public class Problema extends JFrame{
         detallePanelDerecho.setFont(headlineFont);
 
 
-        JButton botonPanelDerecho = new JButton("Alta en el servicio");
+        botonPanelDerecho = new JButton("Alta en el servicio");
         botonPanelDerecho.setBounds(100, 160, 145, 40);
         botonPanelDerecho.setBackground(Color.RED);
         botonPanelDerecho.setBorder(null);

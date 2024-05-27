@@ -2,22 +2,17 @@ package controlador;
 
 import programa.*;
 import vista.Dashboard;
-import vista.LoginForm;
-import vista.NewUser;
-import vista.enviarDinero;
+import vista.EnviarDinero;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-public class nuevaTransaccionControlador implements ActionListener {
-    private enviarDinero vista;
+public class NuevaTransaccionControlador implements ActionListener {
+    private EnviarDinero vista;
 
-    public nuevaTransaccionControlador(enviarDinero visita) throws IOException, ClassNotFoundException {
+    public NuevaTransaccionControlador(EnviarDinero visita) throws IOException, ClassNotFoundException {
         this.vista = visita;
         vista.enviarButton.addActionListener(this);
         vista.volverButton.addActionListener(this);
@@ -50,8 +45,8 @@ public class nuevaTransaccionControlador implements ActionListener {
         String nombreCuentaOrigen = vista.getSelectedCuenta();
         int idCuentaDestino = vista.getidCuentaField();
 
-        Cuenta cuentaOrigen = cuentaDAO.buscarCuentaPorNombre(nombreCuentaOrigen, Util.con());
-        Cuenta cuentaDestino = cuentaDAO.buscarCuentaPorId(idCuentaDestino, Util.con());
+        Cuenta cuentaOrigen = CuentaDAO.buscarCuentaPorNombre(nombreCuentaOrigen, Util.con());
+        Cuenta cuentaDestino = CuentaDAO.buscarCuentaPorId(idCuentaDestino, Util.con());
 
         System.out.println("Cuenta de origen ID: " + cuentaOrigen.getId());
         System.out.println("Cuenta de destino ID: " + cuentaDestino.getId());

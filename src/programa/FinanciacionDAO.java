@@ -10,7 +10,7 @@ public class FinanciacionDAO {
 
 
     public static ArrayList<Financiacion> cogerTodasFinanciacionCuentas(int id, Connection con) {
-        ArrayList<Cuenta> cuentas = cuentaDAO.cogerTodasCuentasUsuario(id, con);
+        ArrayList<Cuenta> cuentas = CuentaDAO.cogerTodasCuentasUsuario(id, con);
         ArrayList<Financiacion> financiaciones = new ArrayList<>();
 
         for (Cuenta cuenta : cuentas) {

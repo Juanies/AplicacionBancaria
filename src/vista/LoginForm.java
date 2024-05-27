@@ -9,7 +9,7 @@ public class LoginForm extends JFrame {
     public JTextField numeroDocumentoField;
     public JTextField claveField;
     public JButton entrar;
-
+    public JButton problemas;
     public LoginForm(){
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,7 +50,8 @@ public class LoginForm extends JFrame {
 
 
 
-        JButton problemas = new JButton("¿Problemas con tu clave de acceso?");
+
+         problemas = new JButton("¿Problemas con tu clave de acceso?");
         problemas.setBounds(250, 240, problemas.getPreferredSize().width, size.height);
         problemas.setBackground(null);
         problemas.setContentAreaFilled(false);

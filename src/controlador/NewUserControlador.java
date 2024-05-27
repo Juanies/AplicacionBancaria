@@ -3,10 +3,14 @@ package controlador;
 import programa.Usuario;
 import programa.UsuarioDAO;
 import programa.Util;
+import programa.Ventana;
 import vista.NewUser;
+import vista.OlvidarContraseña;
+import vista.Problema;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -31,6 +35,13 @@ public class NewUserControlador implements ActionListener {
                 try {
                     nuevoUsuario();
                 } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                break;
+            case "Cancelar":
+                try {
+                    Ventana.nuevaVentana(vista, new ProblemaControlador(new Problema()));
+                } catch ( ClassNotFoundException | IOException ex) {
                     throw new RuntimeException(ex);
                 }
                 break;

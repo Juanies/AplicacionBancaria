@@ -12,10 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.*;
-        import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.HashMap;
 
 public class DashBoardControlador  implements ActionListener {
@@ -53,28 +49,28 @@ public class DashBoardControlador  implements ActionListener {
                 break;
             case "Nueva cuenta":
                 try {
-                    Ventana.nuevaVentana(vista, new nuevaCuentaControlador(new NuevaCuenta()));
+                    Ventana.nuevaVentana(vista, new NuevaCuentaControlador(new NuevaCuenta()));
                 } catch (IOException | ClassNotFoundException ex) {
                     throw new RuntimeException(ex);
                 }
                 break;
             case "Nueva tarjeta":
                 try {
-                    Ventana.nuevaVentana(vista, new nuevaTarjetaControlador(new nuevaTarjeta()));
+                    Ventana.nuevaVentana(vista, new NuevaTarjetaControlador(new NuevaTarjeta()));
                 } catch (IOException | ClassNotFoundException ex) {
                     throw new RuntimeException(ex);
                 }
                 break;
             case "Nueva financiación":
                 try {
-                    Ventana.nuevaVentana(vista, new nuevaFinanciacionControlador(new nuevaFinanciacion()));
+                    Ventana.nuevaVentana(vista, new NuevaFinanciacionControlador(new NuevaFinanciacion()));
                 } catch (IOException | ClassNotFoundException ex) {
                     throw new RuntimeException(ex);
                 }
                 break;
             case "Enviar dinero":
                 try {
-                    Ventana.nuevaVentana(vista, new nuevaTransaccionControlador(new enviarDinero()));
+                    Ventana.nuevaVentana(vista, new NuevaTransaccionControlador(new EnviarDinero()));
                 } catch (IOException | ClassNotFoundException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -86,7 +82,7 @@ public class DashBoardControlador  implements ActionListener {
         Connection con = Util.con();
         int usuarioId = UsuarioDAO.getUsuarioActual().getId();
 
-        ArrayList<Cuenta> cuentasUsuario = cuentaDAO.cogerTodasCuentasUsuario(usuarioId, con);
+        ArrayList<Cuenta> cuentasUsuario = CuentaDAO.cogerTodasCuentasUsuario(usuarioId, con);
         ArrayList<Tarjeta> tarjetasUsuario = TarjetaDAO.cogerTarjetasTodasCuentas(cuentasUsuario, con);
 
         HashMap<Integer, Double> saldoPorCuenta = new HashMap<>();
@@ -106,9 +102,9 @@ public class DashBoardControlador  implements ActionListener {
     }
 
     private void setCuentas() throws SQLException, IOException, ClassNotFoundException {
-        vista.setCuentas(cuentaDAO.cogerTodasCuentasUsuario(UsuarioDAO.getUsuarioActual().getId(), Util.con()));
+        vista.setCuentas(CuentaDAO.cogerTodasCuentasUsuario(UsuarioDAO.getUsuarioActual().getId(), Util.con()));
 
-        double saldoTotal = cuentaDAO.saldoTodasCuentas(UsuarioDAO.getUsuarioActual().getId(), Util.con());
+        double saldoTotal = CuentaDAO.saldoTodasCuentas(UsuarioDAO.getUsuarioActual().getId(), Util.con());
         vista.setDineroTotalText(String.valueOf(saldoTotal));
 
         double financiacionTotal = FinanciacionDAO.financiacionTotal(UsuarioDAO.getUsuarioActual().getId(), Util.con());

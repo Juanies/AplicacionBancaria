@@ -170,10 +170,6 @@ public class Dashboard extends JFrame {
         cuentasPanel.setBackground(new Color(248, 249, 250));
         Cuentas.add(cuentasPanel, BorderLayout.CENTER);
 
-
-
-
-
         leftPanel.add(Box.createVerticalStrut(20));
         leftPanel.add(Cuentas);
 

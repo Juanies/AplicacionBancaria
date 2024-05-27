@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class cuentaDAO {
+public class CuentaDAO {
     public static void crearCuenta(int id, String tipoCuenta, String nombreCuenta, Connection con) throws SQLException {
         String sql = "INSERT INTO cuenta (usuarioID, saldo, tipoCuenta, fechaCreacion, nombreCuenta) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = con.prepareStatement(sql)) {

@@ -3,14 +3,14 @@ package vista;
 import programa.Cuenta;
 import programa.UsuarioDAO;
 import programa.Util;
-import programa.cuentaDAO;
+import programa.CuentaDAO;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class enviarDinero extends JFrame {
+public class EnviarDinero extends JFrame {
     public JTextField idCuentaField;
     public JTextField cantidadField;
     public JTextField motivoField;
@@ -19,7 +19,7 @@ public class enviarDinero extends JFrame {
     public JComboBox<String> cuenta;
     public String[] financiacionOptions = {""};
 
-    public enviarDinero(){
+    public EnviarDinero(){
         setSize(400, 350);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
@@ -88,7 +88,7 @@ public class enviarDinero extends JFrame {
     }
 
     public void setCuentas() throws IOException, ClassNotFoundException {
-        ArrayList<Cuenta> cuentas = cuentaDAO.cogerTodasCuentasUsuario(UsuarioDAO.getUsuarioActual().getId(), Util.con());
+        ArrayList<Cuenta> cuentas = CuentaDAO.cogerTodasCuentasUsuario(UsuarioDAO.getUsuarioActual().getId(), Util.con());
         ArrayList<String> nombres = new ArrayList<>();
 
         for (Cuenta cuenta : cuentas) {

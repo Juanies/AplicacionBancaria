@@ -2,21 +2,17 @@ package controlador;
 
 import programa.*;
 import vista.Dashboard;
-import vista.LoginForm;
-import vista.NewUser;
-import vista.nuevaFinanciacion;
+import vista.NuevaFinanciacion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-public class nuevaFinanciacionControlador implements ActionListener {
-    private nuevaFinanciacion vista;
+public class NuevaFinanciacionControlador implements ActionListener {
+    private NuevaFinanciacion vista;
 
-    public nuevaFinanciacionControlador(nuevaFinanciacion visita) throws IOException, ClassNotFoundException {
+    public NuevaFinanciacionControlador(NuevaFinanciacion visita) throws IOException, ClassNotFoundException {
         this.vista = visita;
         vista.solicitar.addActionListener(this);
         vista.setCuentas();
@@ -50,7 +46,7 @@ public class nuevaFinanciacionControlador implements ActionListener {
         String motivo = vista.getMotivoFinanciacion();
         String cuenta = vista.getCuenta();
 
-        Cuenta cuentaUsuario = cuentaDAO.buscarCuentaPorNombre(cuenta, Util.con());
+        Cuenta cuentaUsuario = CuentaDAO.buscarCuentaPorNombre(cuenta, Util.con());
         Financiacion nueva = new Financiacion(cuentaUsuario.getId(), monto, motivo, false);
         FinanciacionDAO.nuevaFinanciacion(Util.con(), nueva);
 

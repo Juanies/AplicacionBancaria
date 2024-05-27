@@ -3,7 +3,7 @@ package controlador;
 import programa.UsuarioDAO;
 import programa.Util;
 import programa.Ventana;
-import programa.cuentaDAO;
+import programa.CuentaDAO;
 import vista.Dashboard;
 import vista.NuevaCuenta;
 
@@ -12,10 +12,10 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class nuevaCuentaControlador implements ActionListener {
+public class NuevaCuentaControlador implements ActionListener {
     private NuevaCuenta vista;
 
-    public nuevaCuentaControlador(NuevaCuenta vista){
+    public NuevaCuentaControlador(NuevaCuenta vista){
         this.vista = vista;
         vista.crear.addActionListener(this);
         vista.volver.addActionListener(this);
@@ -46,7 +46,7 @@ public class nuevaCuentaControlador implements ActionListener {
         String nombreCuenta = vista.getCuentaNombre();
         int idUsuarioActual = UsuarioDAO.getUsuarioActual().getId();
 
-        cuentaDAO.crearCuenta(idUsuarioActual, tipoCuenta, nombreCuenta, Util.con());
+        CuentaDAO.crearCuenta(idUsuarioActual, tipoCuenta, nombreCuenta, Util.con());
 
     }
 
