@@ -80,6 +80,25 @@ public class cuentaDAO {
         return  saldo;
     }
 
+    public static double dineroCuenta(int id, Connection con){
+        Cuenta cuenta = null;
+        String sql = "SELECT * FROM cuenta WHERE id = ?";
+        double saldo = 0;
+        try(PreparedStatement stmt = con.prepareStatement(sql)){
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()){
+                 saldo = rs.getDouble("saldo");
+
+            }
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return saldo;
+    }
+
 
 
 }

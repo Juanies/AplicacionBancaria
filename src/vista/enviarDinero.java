@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class enviarDinero extends JFrame {
+    public JTextField nombreUsuarioField; // Nuevo campo para el nombre de usuario
     public JTextField cantidadField;
     public JTextField motivoField;
     public JButton enviarButton;
@@ -19,7 +20,7 @@ public class enviarDinero extends JFrame {
     public String[] financiacionOptions = {""};
 
     public enviarDinero(){
-        setSize(400, 300);
+        setSize(400, 350);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setTitle("Santander - Enviar Dinero");
@@ -32,43 +33,54 @@ public class enviarDinero extends JFrame {
         titulo.setFont(headlineFontBold);
         titulo.setBounds(150, 10, 200, size.height);
 
+        // Nuevo campo para el nombre de usuario
+        JLabel nombreUsuarioLabel = new JLabel("Usuario:");
+        nombreUsuarioLabel.setFont(headlineFontBold);
+        nombreUsuarioLabel.setBounds(50, 50, 150, 30);
+
+        nombreUsuarioField = new JTextField();
+        nombreUsuarioField.setBounds(150, 50, 200, 30);
+
         JLabel cantidadLabel = new JLabel("Cantidad:");
         cantidadLabel.setFont(headlineFontBold);
-        cantidadLabel.setBounds(50, 50, 100, 30);
+        cantidadLabel.setBounds(50, 100, 100, 30);
 
         cantidadField = new JTextField();
-        cantidadField.setBounds(150, 50, 200, 30);
+        cantidadField.setBounds(150, 100, 200, 30);
 
         JLabel motivoLabel = new JLabel("Motivo:");
         motivoLabel.setFont(headlineFontBold);
-        motivoLabel.setBounds(50, 100, 100, 30);
+        motivoLabel.setBounds(50, 150, 100, 30);
 
         motivoField = new JTextField();
-        motivoField.setBounds(150, 100, 200, 30);
+        motivoField.setBounds(150, 150, 200, 30);
 
         cuenta = new JComboBox<>(financiacionOptions);
-        cuenta.setBounds(50, 220, 300, 30);
+        cuenta.setBounds(50, 200, 300, 30);
 
         enviarButton = new JButton("Enviar");
-        enviarButton.setBounds(50, 200, 150, 40);
+        enviarButton.setBounds(50, 240, 150, 40);
         enviarButton.setBackground(Color.RED);
         enviarButton.setBorder(null);
         enviarButton.setFont(headlineFontBold);
         enviarButton.setForeground(Color.WHITE);
 
         volverButton = new JButton("Volver");
-        volverButton.setBounds(210, 200, 150, 40);
+        volverButton.setBounds(210, 240, 150, 40);
         volverButton.setBackground(Color.LIGHT_GRAY);
         volverButton.setBorder(null);
         volverButton.setFont(headlineFontBold);
         volverButton.setForeground(Color.WHITE);
+
+        add(nombreUsuarioLabel);
+        add(nombreUsuarioField);
 
         add(titulo);
         add(cantidadLabel);
         add(cantidadField);
         add(motivoLabel);
         add(motivoField);
-        add(cuentasComboBox);
+        add(cuenta);
         add(enviarButton);
         add(volverButton);
 
@@ -88,7 +100,10 @@ public class enviarDinero extends JFrame {
 
         // Esto actualiza el ComboBox con el array cambiado
         cuenta.setModel(new DefaultComboBoxModel<>(financiacionOptions));
+    }
 
+    public String getNombreUsuario() {
+        return nombreUsuarioField.getText();
     }
 
     public String getCantidad() {
