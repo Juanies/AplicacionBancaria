@@ -5,7 +5,6 @@ public class Transaccion {
     int idorigen;
     int iddestino;
     double cantidad;
-    int cuentaid;
     String motivo;
 
     public String getMotivo() {
@@ -16,33 +15,23 @@ public class Transaccion {
         this.motivo = motivo;
     }
 
-    public Transaccion(int id, int idorigen, int iddestino, double cantidad, int cuentaid, String motivo) {
+    public Transaccion(int id, int idorigen, int iddestino, double cantidad, String motivo) {
         this.id = id;
         this.idorigen = idorigen;
         this.iddestino = iddestino;
         this.cantidad = cantidad;
-        this.cuentaid = cuentaid;
         this.motivo = motivo;
     }
 
-    public Transaccion(int idorigen, int iddestino, double cantidad, int cuentaid, String motivo) {
+    public Transaccion(int idorigen, int iddestino, double cantidad, String motivo) {
         this.idorigen = idorigen;
         this.iddestino = iddestino;
         this.cantidad = cantidad;
-        this.cuentaid = cuentaid;
         this.motivo = motivo;
     }
 
     public int getId() {
         return id;
-    }
-
-    public int getCuentaid() {
-        return cuentaid;
-    }
-
-    public void setCuentaid(int cuentaid) {
-        this.cuentaid = cuentaid;
     }
 
     public void setId(int id) {

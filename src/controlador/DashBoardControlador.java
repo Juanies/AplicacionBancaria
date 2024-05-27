@@ -72,6 +72,13 @@ public class DashBoardControlador  implements ActionListener {
                     throw new RuntimeException(ex);
                 }
                 break;
+            case "Enviar dinero":
+                try {
+                    Ventana.nuevaVentana(vista, new nuevaTransaccionControlador(new enviarDinero()));
+                } catch (IOException | ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+                break;
         }
     }
 

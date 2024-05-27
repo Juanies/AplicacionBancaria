@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class enviarDinero extends JFrame {
-    public JTextField nombreUsuarioField; // Nuevo campo para el nombre de usuario
+    public JTextField idCuentaField;
     public JTextField cantidadField;
     public JTextField motivoField;
     public JButton enviarButton;
@@ -33,13 +33,12 @@ public class enviarDinero extends JFrame {
         titulo.setFont(headlineFontBold);
         titulo.setBounds(150, 10, 200, size.height);
 
-        // Nuevo campo para el nombre de usuario
-        JLabel nombreUsuarioLabel = new JLabel("Usuario:");
-        nombreUsuarioLabel.setFont(headlineFontBold);
-        nombreUsuarioLabel.setBounds(50, 50, 150, 30);
+        JLabel idCuentaLabel = new JLabel("Id cuenta:");
+        idCuentaLabel.setFont(headlineFontBold);
+        idCuentaLabel.setBounds(50, 50, 150, 30);
 
-        nombreUsuarioField = new JTextField();
-        nombreUsuarioField.setBounds(150, 50, 200, 30);
+        idCuentaField = new JTextField();
+        idCuentaField.setBounds(150, 50, 200, 30);
 
         JLabel cantidadLabel = new JLabel("Cantidad:");
         cantidadLabel.setFont(headlineFontBold);
@@ -72,8 +71,8 @@ public class enviarDinero extends JFrame {
         volverButton.setFont(headlineFontBold);
         volverButton.setForeground(Color.WHITE);
 
-        add(nombreUsuarioLabel);
-        add(nombreUsuarioField);
+        add(idCuentaField);
+        add(idCuentaLabel);
 
         add(titulo);
         add(cantidadLabel);
@@ -102,12 +101,12 @@ public class enviarDinero extends JFrame {
         cuenta.setModel(new DefaultComboBoxModel<>(financiacionOptions));
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuarioField.getText();
+    public int getidCuentaField() {
+        return  Integer.parseInt(idCuentaField.getText());
     }
 
-    public String getCantidad() {
-        return cantidadField.getText();
+    public double getCantidad() {
+        return Double.parseDouble(cantidadField.getText());
     }
 
     public String getMotivo() {

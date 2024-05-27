@@ -46,17 +46,21 @@ public class nuevaTransaccionControlador implements ActionListener {
 
     public void nuevaTrans() throws SQLException, IOException, ClassNotFoundException {
 
-        Cuenta cuenta = cuentaDAO.buscarCuentaPorNombre(vista.getSelectedCuenta(), Util.con());
-        int cantidadCuenta = (int) cuentaDAO.dineroCuenta(cuenta.getId(), Util.con());
-        int cantidadPedida = Integer.parseInt(vista.getCantidad());
 
-        if (cantidadPedida > cantidadCuenta ){
-            JOptionPane.showMessageDialog(null, "No tienes saldo", "Error", JOptionPane.INFORMATION_MESSAGE);
-        }else{
+        String nombreCuentaOrigen = vista.getSelectedCuenta();
+        int idCuentaDestino = vista.getidCuentaField();
 
-        }
+        Cuenta cuentaOrigen = cuentaDAO.buscarCuentaPorNombre(nombreCuentaOrigen, Util.con());
+        Cuenta cuentaDestino = cuentaDAO.buscarCuentaPorId(idCuentaDestino, Util.con());
+
+        System.out.println("Cuenta de origen ID: " + cuentaOrigen.getId());
+        System.out.println("Cuenta de destino ID: " + cuentaDestino.getId());
+
+        TransaccionDAO.enviarDinero(cuentaOrigen, cuentaDestino, vista.getCantidad(), vista.getMotivo(), Util.con());
 
     }
 
 
 }
+
+
