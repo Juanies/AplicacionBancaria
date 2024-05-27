@@ -26,8 +26,9 @@ public class FinanciacionDAO {
                     double cantidadFinanciacion = rs.getDouble("cantidad");
                     String motivoFinanciacion = rs.getString("motivo");
                     Boolean estaAceptado = rs.getBoolean("aceptado");
+                    Boolean estaRechazado = rs.getBoolean("rechazado");
 
-                    Financiacion financiacion = new Financiacion(financiacionID, cuentaid, cantidadFinanciacion, motivoFinanciacion, estaAceptado);
+                    Financiacion financiacion = new Financiacion(financiacionID, cuentaid, cantidadFinanciacion, motivoFinanciacion, estaAceptado, estaRechazado);
                     if (financiacion.getAceptado()) {
                         financiaciones.add(financiacion);
                     }
@@ -53,12 +54,13 @@ public class FinanciacionDAO {
     }
 
     public static void nuevaFinanciacion(Connection con, Financiacion financiacion) {
-        String sql = "INSERT INTO financiacion (cuentaID, cantidad, motivo, aceptado) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO financiacion (cuentaID, cantidad, motivo, aceptado, rechazado) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, financiacion.getCuentaID());
             stmt.setDouble(2, financiacion.getCantidad());
             stmt.setString(3, financiacion.getMotivo());
             stmt.setBoolean(4, financiacion.getAceptado());
+            stmt.setBoolean(5, financiacion.getRechazado());
 
             stmt.executeUpdate();
         } catch (SQLException e) {

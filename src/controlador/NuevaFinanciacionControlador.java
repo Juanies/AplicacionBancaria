@@ -47,7 +47,7 @@ public class NuevaFinanciacionControlador implements ActionListener {
         String cuenta = vista.getCuenta();
 
         Cuenta cuentaUsuario = CuentaDAO.buscarCuentaPorNombre(cuenta, Util.con());
-        Financiacion nueva = new Financiacion(cuentaUsuario.getId(), monto, motivo, false);
+        Financiacion nueva = new Financiacion(cuentaUsuario.getId(), monto, motivo, false, false);
         FinanciacionDAO.nuevaFinanciacion(Util.con(), nueva);
 
     }

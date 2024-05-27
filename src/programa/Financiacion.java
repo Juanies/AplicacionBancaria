@@ -12,21 +12,31 @@ public class Financiacion {
     private double cantidad;
     private String motivo;
     private Boolean aceptado;
+    private Boolean rechazado;
 
-
-    public Financiacion(int cuentaID, double cantidad, String motivo, Boolean aceptado) {
+    public Financiacion(int cuentaID, double cantidad, String motivo, Boolean aceptado, Boolean rechazado) {
         this.cuentaID = cuentaID;
         this.cantidad = cantidad;
         this.motivo = motivo;
         this.aceptado = aceptado;
+        this.rechazado = rechazado;
     }
 
-    public Financiacion(int id, int cuentaID, double cantidad, String motivo, Boolean aceptado) {
+    public Boolean getRechazado() {
+        return rechazado;
+    }
+
+    public void setRechazado(Boolean rechazado) {
+        this.rechazado = rechazado;
+    }
+
+    public Financiacion(int id, int cuentaID, double cantidad, String motivo, Boolean aceptado, Boolean rechazado) {
         this.id = id;
         this.cuentaID = cuentaID;
         this.cantidad = cantidad;
         this.motivo = motivo;
         this.aceptado = aceptado;
+        this.rechazado = rechazado;
     }
 
 
