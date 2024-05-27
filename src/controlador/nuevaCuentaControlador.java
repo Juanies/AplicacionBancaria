@@ -2,6 +2,7 @@ package controlador;
 
 import programa.UsuarioDAO;
 import programa.Util;
+import programa.Ventana;
 import programa.cuentaDAO;
 import vista.Dashboard;
 import vista.NuevaCuenta;
@@ -17,6 +18,7 @@ public class nuevaCuentaControlador implements ActionListener {
     public nuevaCuentaControlador(NuevaCuenta vista){
         this.vista = vista;
         vista.crear.addActionListener(this);
+        vista.volver.addActionListener(this);
     }
 
     @Override
@@ -26,6 +28,13 @@ public class nuevaCuentaControlador implements ActionListener {
                 try {
                     crearCuenta();
                 } catch (IOException | ClassNotFoundException | SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                break;
+            case "Volver":
+                try {
+                    Ventana.nuevaVentana(vista, new DashBoardControlador(new Dashboard()));
+                } catch (IOException | ClassNotFoundException ex) {
                     throw new RuntimeException(ex);
                 }
                 break;

@@ -7,6 +7,7 @@ public class NuevaCuenta extends JFrame {
     public JComboBox<String> tipoCuenta;
     public JTextField nombreCuenta;
     public JButton crear;
+    public JButton volver;
 
     public NuevaCuenta(){
         setSize(400, 300);
@@ -38,11 +39,20 @@ public class NuevaCuenta extends JFrame {
         nombreCuenta.setBounds(50, 130, 300, 30);
 
         crear = new JButton("Crear Cuenta");
-        crear.setBounds(125, 180, 150, 40);
+        crear.setBounds(50, 180, 300, 40);
         crear.setBackground(Color.RED);
         crear.setBorder(null);
         crear.setFont(headlineFontBold);
         crear.setForeground(Color.WHITE);
+
+
+
+        volver = new JButton("Volver");
+        volver.setBounds(50, 220, 300, 40);
+        volver.setBackground(Color.LIGHT_GRAY);
+        volver.setBorder(null);
+        volver.setFont(headlineFontBold);
+        volver.setForeground(Color.WHITE);
 
         add(titulo);
         add(accountTypeLabel);
@@ -50,6 +60,7 @@ public class NuevaCuenta extends JFrame {
         add(accountNameLabel);
         add(nombreCuenta);
         add(crear);
+        add(volver);
 
         setLocationRelativeTo(null);
         setVisible(true);
@@ -64,5 +75,3 @@ public class NuevaCuenta extends JFrame {
     }
 
 }
-
-

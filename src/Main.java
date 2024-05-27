@@ -14,7 +14,7 @@ public class Main extends JFrame{
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
 
-        new Dashboard();
+        new enviarDinero();
     }
 
 }

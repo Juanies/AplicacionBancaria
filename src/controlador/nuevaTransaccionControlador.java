@@ -4,7 +4,7 @@ import programa.*;
 import vista.Dashboard;
 import vista.LoginForm;
 import vista.NewUser;
-import vista.nuevaFinanciacion;
+import vista.enviarDinero;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,23 +13,23 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class nuevaFinanciacionControlador implements ActionListener {
-    private nuevaFinanciacion vista;
+public class nuevaTransaccionControlador implements ActionListener {
+    private enviarDinero vista;
 
-    public nuevaFinanciacionControlador(nuevaFinanciacion visita) throws IOException, ClassNotFoundException {
+    public nuevaTransaccionControlador(enviarDinero visita){
         this.vista = visita;
-        vista.solicitar.addActionListener(this);
-        vista.setCuentas();
-        vista.volver.addActionListener(this);
+        vista.enviarButton.addActionListener(this);
+        vista.volverButton.addActionListener(this);
+
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()){
-            case "Solicitar Financiación":
+            case "Enviar":
                 try {
-                    solicitar();
+                    nuevaTrans();
                 } catch (SQLException | IOException | ClassNotFoundException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -44,15 +44,10 @@ public class nuevaFinanciacionControlador implements ActionListener {
         }
     }
 
-    public void solicitar() throws SQLException, IOException, ClassNotFoundException {
-
-        double monto = Double.parseDouble(vista.getMontoFinanciado());
-        String motivo = vista.getMotivoFinanciacion();
-        String cuenta = vista.getCuenta();
-
-        Cuenta cuentaUsuario = cuentaDAO.buscarCuentaPorNombre(cuenta, Util.con());
-        Financiacion nueva = new Financiacion(cuentaUsuario.getId(), monto, motivo, false);
-        FinanciacionDAO.nuevaFinanciacion(Util.con(), nueva);
-
+    public void nuevaTrans() throws SQLException, IOException, ClassNotFoundException {
+        Transaccion transaccion = new Transaccion(vista.getCantidad());
+        TransaccionDAO.crearTransaccion();
     }
+
+
 }

@@ -1,6 +1,8 @@
 package vista;
 
 import programa.Cuenta;
+import programa.Financiacion;
+import programa.Tarjeta;
 import vista.LoginForm;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
@@ -9,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Dashboard extends JFrame {
     public JPanel leftPanel;
@@ -21,6 +24,12 @@ public class Dashboard extends JFrame {
     public JPanel cuentasPanel;
     public Font FontsBold;
     public Font Fonts;
+    public JPanel tarjetasPanel;
+    public ArrayList<JButton> botones = new ArrayList<>();
+    public JButton cambiar;
+    public JPanel financiacionPanel;
+
+
 
     public Dashboard() {
         setSize(900, 600);
@@ -41,20 +50,21 @@ public class Dashboard extends JFrame {
 
         saludoUsuario = new JLabel("");
         ultimaConexion = new JLabel("");
-        JLabel x2 = new JLabel("Cambiar");
+        cambiar = new JButton("Cambiar");
 
         saludoUsuario.setFont(Fonts);
         saludoUsuario.setForeground(Color.WHITE);
         ultimaConexion.setFont(Fonts);
         ultimaConexion.setForeground(Color.WHITE);
-        x2.setFont(FontsBold);
-        x2.setForeground(Color.WHITE);
+        cambiar.setFont(FontsBold);
+        cambiar.setForeground(Color.WHITE);
+        cambiar.setBackground(null);
 
         navBar.add(saludoUsuario);
         navBar.add(Box.createHorizontalGlue());
         navBar.add(ultimaConexion);
         navBar.add(Box.createHorizontalGlue());
-        navBar.add(x2);
+        navBar.add(cambiar);
 
         add(navBar, BorderLayout.NORTH);
 
@@ -138,6 +148,7 @@ public class Dashboard extends JFrame {
             botons.setMaximumSize(new Dimension(Integer.MAX_VALUE, botons.getPreferredSize().height + 20));
             botons.setBackground(Color.WHITE);
             rightPanel.add(botons);
+            botones.add(botons);
         }
 
         centerPanel.add(scrollPane, BorderLayout.WEST);
@@ -161,6 +172,8 @@ public class Dashboard extends JFrame {
 
 
 
+
+
         leftPanel.add(Box.createVerticalStrut(20));
         leftPanel.add(Cuentas);
 
@@ -175,52 +188,35 @@ public class Dashboard extends JFrame {
 
         Tarjetas.add(tarjetasLabel, BorderLayout.NORTH);
 
-        JPanel tarjetasPanel = new JPanel();
+        tarjetasPanel = new JPanel();
         tarjetasPanel.setLayout(new BoxLayout(tarjetasPanel, BoxLayout.Y_AXIS));
         tarjetasPanel.setBackground(new Color(248, 249, 250));
         Tarjetas.add(tarjetasPanel, BorderLayout.CENTER);
 
-        for (int i = 1; i <= 3; i++) {
-            JPanel tarjeta = new JPanel(new BorderLayout());
-            tarjeta.setBorder(new EmptyBorder(10, 40, 10, 10));
-            tarjeta.setSize(new Dimension(630, 90));
-            tarjeta.setBackground(new Color(255, 255, 255));
-
-            JPanel tarjetaInfoPanel = new JPanel();
-            tarjetaInfoPanel.setLayout(new BoxLayout(tarjetaInfoPanel, BoxLayout.Y_AXIS));
-            tarjetaInfoPanel.setOpaque(false);
-
-            JLabel tarjetaLabel = new JLabel("Tarjeta " + i);
-            tarjetaLabel.setFont(FontsBold);
-            tarjetaLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-            JLabel numberLabel = new JLabel("5678");
-            numberLabel.setFont(Fonts);
-            numberLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-            tarjetaInfoPanel.add(tarjetaLabel);
-            tarjetaInfoPanel.add(Box.createVerticalStrut(5));
-            tarjetaInfoPanel.add(numberLabel);
-
-            JLabel montoLabel = new JLabel("5000EUR");
-            montoLabel.setFont(FontsBold);
-            montoLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-
-            JLabel tarjetaImage = new JLabel(new ImageIcon("src/media/icono.png"));
-            tarjetaImage.setPreferredSize(new Dimension(60, 40));
-
-            tarjeta.add(tarjetaInfoPanel, BorderLayout.WEST);
-            tarjeta.add(montoLabel, BorderLayout.EAST);
-            tarjeta.add(tarjetaImage, BorderLayout.CENTER);
-
-            tarjetasPanel.add(tarjeta);
-            tarjetasPanel.add(Box.createVerticalStrut(10));
-        }
 
         leftPanel.add(Box.createVerticalStrut(20));
         leftPanel.add(Tarjetas);
 
         add(centerPanel, BorderLayout.CENTER);
+
+        JPanel Financiacion = new JPanel(new BorderLayout());
+        Financiacion.setBorder(new EmptyBorder(10, 10, 10, 10));
+        Financiacion.setBackground(new Color(248, 249, 250));
+
+        JLabel financiacionLabel2 = new JLabel("Financiación:");
+        financiacionLabel2.setFont(FontsBold);
+        financiacionLabel2.setOpaque(true);
+        financiacionLabel2.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        Financiacion.add(financiacionLabel2, BorderLayout.NORTH);
+
+        financiacionPanel = new JPanel();
+        financiacionPanel.setLayout(new BoxLayout(financiacionPanel, BoxLayout.Y_AXIS));
+        financiacionPanel.setBackground(new Color(248, 249, 250));
+        Financiacion.add(financiacionPanel, BorderLayout.CENTER);
+
+        leftPanel.add(Box.createVerticalStrut(20));
+        leftPanel.add(Financiacion);
 
         setVisible(true);
     }
@@ -281,6 +277,87 @@ public class Dashboard extends JFrame {
         }
     }
 
-}
+    public void setTarjetas(ArrayList<Tarjeta> tarjetas, HashMap<Integer, Double> saldoPorCuenta) {
+        for (Tarjeta tarjetaa : tarjetas) {
+            int cuentaId = tarjetaa.getCuentaID();
+            double saldo = saldoPorCuenta.getOrDefault(cuentaId, 0.0);
+
+
+            JPanel tarjeta = new JPanel(new BorderLayout());
+            tarjeta.setBorder(new EmptyBorder(10, 40, 10, 10));
+            tarjeta.setSize(new Dimension(630, 90));
+            tarjeta.setBackground(new Color(255, 255, 255));
+
+            JPanel tarjetaInfoPanel = new JPanel();
+            tarjetaInfoPanel.setLayout(new BoxLayout(tarjetaInfoPanel, BoxLayout.Y_AXIS));
+            tarjetaInfoPanel.setOpaque(false);
+
+            JLabel tarjetaLabel = new JLabel("Tarjeta " + tarjetaa.getNombre());
+            tarjetaLabel.setFont(FontsBold);
+            tarjetaLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            JLabel numberLabel = new JLabel(String.valueOf(tarjetaa.getId()));
+            numberLabel.setFont(Fonts);
+            numberLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            tarjetaInfoPanel.add(tarjetaLabel);
+            tarjetaInfoPanel.add(Box.createVerticalStrut(5));
+            tarjetaInfoPanel.add(numberLabel);
+
+            JLabel montoLabel = new JLabel(String.valueOf(saldo + " EUR"));
+            montoLabel.setFont(FontsBold);
+            montoLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+
+            JLabel tarjetaImage = new JLabel(new ImageIcon("src/media/icono.png"));
+            tarjetaImage.setPreferredSize(new Dimension(60, 40));
+
+            tarjeta.add(tarjetaInfoPanel, BorderLayout.WEST);
+            tarjeta.add(montoLabel, BorderLayout.EAST);
+            tarjeta.add(tarjetaImage, BorderLayout.CENTER);
+
+            tarjetasPanel.add(tarjeta);
+            tarjetasPanel.add(Box.createVerticalStrut(10));
+        }
+
+    }
+
+    public void setFinanciacion(ArrayList<Financiacion> financiaciones) {
+        for (Financiacion financiacion : financiaciones) {
+            JPanel financiacionItem = new JPanel(new BorderLayout());
+            financiacionItem.setBorder(new EmptyBorder(10, 40, 10, 10));
+            financiacionItem.setSize(new Dimension(630, 90));
+            financiacionItem.setBackground(new Color(255, 255, 255));
+
+            JPanel financiacionInfoPanel = new JPanel();
+            financiacionInfoPanel.setLayout(new BoxLayout(financiacionInfoPanel, BoxLayout.Y_AXIS));
+            financiacionInfoPanel.setOpaque(false);
+
+            JLabel financiacionLabel = new JLabel(financiacion.getMotivo());
+            financiacionLabel.setFont(FontsBold);
+            financiacionLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            JLabel financiacionIdLabel = new JLabel(String.valueOf(financiacion.getId()));
+            financiacionIdLabel.setFont(Fonts);
+            financiacionIdLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            financiacionInfoPanel.add(financiacionLabel);
+            financiacionInfoPanel.add(Box.createVerticalStrut(5));
+            financiacionInfoPanel.add(financiacionIdLabel);
+
+            JLabel financiacionMontoLabel = new JLabel(financiacion.getCantidad() + " EUR");
+            financiacionMontoLabel.setFont(FontsBold);
+            financiacionMontoLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+
+            financiacionItem.add(financiacionInfoPanel, BorderLayout.WEST);
+            financiacionItem.add(financiacionMontoLabel, BorderLayout.EAST);
+
+            financiacionPanel.add(financiacionItem);
+            financiacionPanel.add(Box.createVerticalStrut(10));
+        }
+    }
+
+    }
+
+
 
 

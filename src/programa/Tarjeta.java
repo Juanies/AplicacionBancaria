@@ -2,33 +2,40 @@ package programa;
 
 public class Tarjeta {
     private int id;
-    private int usuarioID;
     private int cuentaID;
     private String tipoTarjeta;
+    private String nombre;
 
-    // Constructor, getters y setters
-    public Tarjeta(int id, int usuarioID, int cuentaID, String tipoTarjeta) {
-        this.id = id;
-        this.usuarioID = usuarioID;
-        this.cuentaID = cuentaID;
-        this.tipoTarjeta = tipoTarjeta;
-    }
 
     public int getId() {
         return id;
+    }
+
+    public Tarjeta(int id, int cuentaID, String tipoTarjeta, String nombre) {
+        this.id = id;
+        this.cuentaID = cuentaID;
+        this.tipoTarjeta = tipoTarjeta;
+        this.nombre = nombre;
+    }
+
+    public Tarjeta(int cuentaID, String tipoTarjeta, String nombre) {
+        this.cuentaID = cuentaID;
+        this.tipoTarjeta = tipoTarjeta;
+        this.nombre = nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public int getUsuarioID() {
-        return usuarioID;
-    }
-
-    public void setUsuarioID(int usuarioID) {
-        this.usuarioID = usuarioID;
-    }
 
     public int getCuentaID() {
         return cuentaID;
